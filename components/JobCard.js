@@ -4,6 +4,7 @@ import {
   Card,
 } from 'react-bootstrap';
 import PropTypes from 'prop-types';
+import Link from 'next/link';
 import { deleteJob } from '../api/jobData';
 
 export default function JobCard({ jobObj, onUpdate }) {
@@ -14,17 +15,23 @@ export default function JobCard({ jobObj, onUpdate }) {
   };
 
   return (
-    <Card>
-      <Card.Img />
-
+    <Card style={{ width: '25rem', margin: '10px' }}>
       <Card.Body>
+        <Card.Img variant="top" src={jobObj.image} alt={jobObj.title} style={{ height: '18rem' }} />
         <Card.Title>
           {jobObj.title}
         </Card.Title>
-
-        <Button variant="danger" onClick={deleteThisJob} className="m-2">
-          DELETE
-        </Button>
+        <p>
+          {jobObj.description}
+        </p>
+        <p>
+          {jobObj.assigned}
+          {jobObj.status}
+        </p>
+        <Link href={`/job/edit/${jobObj.firebaseKey}`} passHref>
+          <Button variant="secondary">EDIT</Button>
+        </Link>
+        <Button variant="danger" onClick={deleteThisJob} className="m-2">DELETE</Button>
       </Card.Body>
     </Card>
   );
@@ -32,11 +39,11 @@ export default function JobCard({ jobObj, onUpdate }) {
 
 JobCard.propTypes = {
   jobObj: PropTypes.shape({
-    // image: PropTypes.string,
+    image: PropTypes.string,
     title: PropTypes.string,
-    status: PropTypes.string,
     description: PropTypes.string,
-    assigned: PropTypes.string,
+    status: PropTypes.bool,
+    assigned: PropTypes.bool,
     firebaseKey: PropTypes.string,
     // user: PropTypes.shape({
     //   firebaseKey: PropTypes.number,
