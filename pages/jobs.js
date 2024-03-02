@@ -6,7 +6,7 @@ import { getJobs } from '../api/jobData';
 export default function JobsPage() {
   const [jobs, setJobs] = useState([]);
   const { user } = useAuth();
-
+  // console.warn(jobs);
   const getAllTheJobs = () => {
     getJobs(user.uid).then((data) => {
       setJobs(data);
