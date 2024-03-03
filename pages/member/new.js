@@ -1,7 +1,10 @@
 import React from 'react';
+import CrewMemberForm from '../../components/forms/CrewMemberForm';
 
-export default function AddMember() {
+export default function AddCrewMember() {
   return (
-    <div>Member Form</div>
+    <div>
+      <CrewMemberForm />
+    </div>
   );
 }
