@@ -12,14 +12,14 @@ const initialState = {
   description: '',
 };
 
-function JobForm({ obj }) {
+function JobForm({ jobObj }) {
   const [formInput, setFormInput] = useState(initialState);
   const router = useRouter();
   const { user } = useAuth();
 
   useEffect(() => {
-    if (obj.firebaseKey) setFormInput(obj);
-  }, [obj, user]);
+    if (jobObj.firebaseKey) setFormInput(jobObj);
+  }, [jobObj, user]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -31,12 +31,12 @@ function JobForm({ obj }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (obj.firebaseKey) {
+    if (jobObj.firebaseKey) {
       updateJob(formInput).then(() => router.push('/jobs'));
     } else {
       const payload = { ...formInput, uid: user.uid };
-      createJob(payload).then(({ title }) => {
-        const patchPayload = { firebaseKey: title };
+      createJob(payload).then(({ name }) => {
+        const patchPayload = { firebaseKey: name };
         updateJob(patchPayload).then(() => {
           router.push('/jobs');
         });
@@ -46,7 +46,7 @@ function JobForm({ obj }) {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <h2 className="text-black mt-5">{obj.firebaseKey ? 'Update' : 'Add a'} Job</h2>
+      <h2 className="text-black mt-5">{jobObj.firebaseKey ? 'Update' : 'Add a'} Job</h2>
 
       {/* IMAGE INPUT  */}
       <FloatingLabel controlId="floatingInput2" label="Job Image" className="mb-3">
@@ -97,13 +97,13 @@ function JobForm({ obj }) {
       </FloatingLabel>
 
       {/* SUBMIT BUTTON  */}
-      <Button type="submit">{obj.firebaseKey ? 'Update' : 'Create'} job</Button>
+      <Button type="submit">{jobObj.firebaseKey ? 'Update' : 'Create'} job</Button>
     </Form>
   );
 }
 
 JobForm.propTypes = {
-  obj: PropTypes.shape({
+  jobObj: PropTypes.shape({
     firebaseKey: PropTypes.string,
     image: PropTypes.string,
     title: PropTypes.string,
@@ -113,7 +113,7 @@ JobForm.propTypes = {
 };
 
 JobForm.defaultProps = {
-  obj: initialState,
+  jobObj: initialState,
 };
 
 export default JobForm;

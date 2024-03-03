@@ -18,7 +18,7 @@ export default function JobsPage() {
   }, []);
 
   return (
-    <div>
+    <div key={jobs}>
       {jobs.map((job) => (
 
         <JobCard key={job.firebaseKey} jobObj={job} onUpdate={getAllTheJobs} />
