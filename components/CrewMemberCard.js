@@ -24,8 +24,10 @@ export default function CrewMemberCard({ memberObj, onUpdate }) {
         <p>
           {memberObj.email}
         </p>
-
-        <Link href={`/job/edit/${memberObj.firebaseKey}`} passHref>
+        <Link href={`/member/${memberObj.firebaseKey}`} passHref>
+          <Button variant="light" className="m-2">VIEW</Button>
+        </Link>
+        <Link href={`/member/edit/${memberObj.firebaseKey}`} passHref>
           <Button variant="secondary">EDIT</Button>
         </Link>
         <Button variant="danger" onClick={deleteThisMember} className="m-2">DELETE</Button>

@@ -84,13 +84,13 @@ function JobForm({ jobObj }) {
         />
       </FloatingLabel>
 
-      {/* description INPUT  */}
-      <FloatingLabel controlId="floatingInput3" label="Job description" className="mb-3">
+      {/* status INPUT  */}
+      <FloatingLabel controlId="floatingInput3" label="Job Status" className="mb-3">
         <Form.Control
           type="text"
-          placeholder="Enter description"
-          name="description"
-          value={formInput.description}
+          placeholder="status"
+          name="status"
+          value={formInput.status}
           onChange={handleChange}
           required
         />
@@ -107,7 +107,7 @@ JobForm.propTypes = {
     firebaseKey: PropTypes.string,
     image: PropTypes.string,
     title: PropTypes.string,
-    description: PropTypes.string,
+    status: PropTypes.string,
     uid: PropTypes.string,
   }),
 };
