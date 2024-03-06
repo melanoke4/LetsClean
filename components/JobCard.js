@@ -22,12 +22,15 @@ export default function JobCard({ jobObj, onUpdate }) {
           {jobObj.title}
         </Card.Title>
         <p>
-          {jobObj.description}
+          {jobObj.address}
         </p>
         <p>
           {jobObj.assigned}
           {jobObj.status}
         </p>
+        <Link href={`/job/${jobObj.firebaseKey}`} passHref>
+          <Button variant="light" className="m-2">VIEW</Button>
+        </Link>
         <Link href={`/job/edit/${jobObj.firebaseKey}`} passHref>
           <Button variant="secondary">EDIT</Button>
         </Link>
@@ -41,7 +44,7 @@ JobCard.propTypes = {
   jobObj: PropTypes.shape({
     image: PropTypes.string,
     title: PropTypes.string,
-    description: PropTypes.string,
+    address: PropTypes.string,
     status: PropTypes.bool,
     assigned: PropTypes.bool,
     firebaseKey: PropTypes.string,
